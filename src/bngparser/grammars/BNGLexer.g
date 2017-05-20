@@ -141,6 +141,7 @@ READFILE: 'readFile';
 FILE: 'file';
 ATOMIZE: 'atomize';
 BLOCKS: 'blocks';
+SKIPACTIONS: 'skip_actions';
 
 //visualize commands
 VISUALIZE: 'visualize';
