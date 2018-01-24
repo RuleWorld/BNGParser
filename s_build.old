@@ -2,30 +2,40 @@
 # #########################################################################
 #   Build Script for BNGParser
 # #########################################################################
-echo ' '
-echo ' '
-echo ' '
-echo ' This script should be called right after cloning the GitHub code.'
-echo ' Building the parser before importing the code into Eclipse will'
-echo ' ensure that Eclipse is using the right parser.'
-echo ' '
 
-#/bin/rm -r -f  BNGParser
-#git clone https://github.com/RuleWorld/BNGParser.git
+#  /bin/rm -r -f  bionetgen
+#  git clone https://github.com/RuleWorld/bionetgen.git
+#  /bin/cp -r bionetgen.safe  bionetgen
+#  cd bionetgen/parsers/BNGParser/src/bngparser/grammars
+
 cd src/bngparser/grammars
+
+#   /home/roc60/eclipse_bngparser/plugins/antlr4ide.core_0.3.5.jar  \
+#antlr4ide.ui_0.3.5.jar
+#org.antlr.runtime_3.2.0.v201101311130.jar
+#antlr4ide.core_0.3.5.jar
+#org.apache.ant_1.9.2.v201404171502/lib/ant-antlr.jar
 
 echo '-------------------------------------------------------------------'
 echo ' Generate grammars'
 echo '-------------------------------------------------------------------'
 
-java -jar  ../../antlr-3.3-complete.jar BNGLexer.g
-java -jar  ../../antlr-3.3-complete.jar BNGGrammar.g
+java -jar   ../antlr-3.3-complete.jar BNGLexer.g
+java -jar   ../antlr-3.3-complete.jar BNGGrammar.g
+
+
+cd ../..
+cp /home/roc60/build_BNGParser/ANTLR/antlr-4.5-complete.jar .
+
+#  javac  -Xlint:deprecation -Xlint:unchecked \
 
 echo '-------------------------------------------------------------------'
 echo ' Compile grammars'
 echo '-------------------------------------------------------------------'
+#javac    -classpath  bngparser/grammars:bngparser/methods:bngparser/models:bngparser/dataType:bngparser/exceptions:antlr-4.5-complete.jar:antlr-3.3-complete.jar:/home/roc60/build_BNGParser/Apache/commons-lang3-3.4/commons-lang3-3.4.jar:. \
+#      -sourcepath . $jfile
 
-cd ../..
+
 for jfile in $(ls bngparser/grammars/*.java)
 do
 echo $jfile
@@ -52,6 +62,7 @@ do
 javac    -classpath  bngparser/grammars:bngparser/methods:bngparser/models:bngparser/dataType:bngparser/exceptions:antlr-3.3-complete.jar:../commons-lang3-3.1.jar:.  -sourcepath . $jfile
 done
 
+
 echo '-------------------------------------------------------------------'
 echo ' Compiling exceptions '
 echo '-------------------------------------------------------------------'
@@ -70,11 +81,8 @@ for jfile in $(ls bngparser/*.java)
 do
   if [ $jfile != 'bngparser/MCellTranslatorTester.java' ];
 then
-  if [ $jfile != 'bngparser/Tester.java' ];
-then
 echo $jfile
 javac    -classpath  bngparser/grammars:bngparser/methods:bngparser/models:bngparser/dataType:bngparser/exceptions:antlr-3.3-complete.jar:../commons-lang3-3.1.jar:.  -sourcepath . $jfile
-fi
 fi
 done
 
@@ -90,10 +98,6 @@ echo ' Running a Test '
 echo '-------------------------------------------------------------------'
 
 cp ../commons-lang3-3.1.jar .
-cat bngparser/Tester.java | sed 's/testModels/\.\.\/testModels/' > bngparser/Tester_new.java 
-mv bngparser/Tester.java      bngparser/Tester.old.java
-mv bngparser/Tester_new.java  bngparser/Tester.java
-
 javac -cp antlr-3.3-complete.jar:BNGParser.jar:commons-lang3-3.1.jar:. \
     bngparser/Tester.java 
 java  -cp antlr-3.3-complete.jar:BNGParser.jar:commons-lang3-3.1.jar:. \
