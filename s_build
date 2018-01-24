@@ -86,13 +86,10 @@ cp ../xml.stg .
 jar cf  BNGParser.jar bngparser  xml.stg
 
 echo '-------------------------------------------------------------------'
-echo ' Running a Test '
+echo ' Running tests '
 echo '-------------------------------------------------------------------'
 
 cp ../commons-lang3-3.1.jar .
-#cat bngparser/Tester.java | sed 's/testModels/\.\.\/testModels/' > bngparser/Tester_new.java 
-#mv bngparser/Tester.java      bngparser/Tester.old.java
-#mv bngparser/Tester_new.java  bngparser/Tester.java
 
 javac -cp antlr-3.3-complete.jar:BNGParser.jar:commons-lang3-3.1.jar:. \
     bngparser/Tester.java 
