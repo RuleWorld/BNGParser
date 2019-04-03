@@ -118,6 +118,7 @@ primitive_element returns [Double value]
 : 
   number {$value = $number.value;} | 
   (IF LPAREN (~RPAREN)+ RPAREN) => if_expression {$value = $if_expression.value;} | 
+  (MRATIO LPAREN (~RPAREN)+ RPAREN) |
   (STRING LPAREN (expression2 (COMMA expression2)*)? RPAREN) => function {$value = $function.value;} | 
   variable {$value = $variable.value;} | 
   (EXP | LN | LOG10 | LOG2 | SQRT | RINT | ABS | SIN | COS | TAN | ASIN | ACOS | ATAN | SINH | COSH | TANH | ASINH | ACOSH | ATANH) LPAREN e1=expression2 RPAREN {$value = Math.exp($e1.value);} | 

@@ -46,7 +46,8 @@ public class Tester {
 		String inputFile2;
 		
 		List<String> inputFileList = new ArrayList<String>();
-		inputFileList = getFileNames("../testModels");
+		inputFileList = getFileNames("testModels");
+//		inputFileList.add("testModels/test_mratio.bngl");
 		String outputFile = "output.xml";
 		
 		if(args.length > 0){
