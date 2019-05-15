@@ -118,7 +118,7 @@ primitive_element returns [Double value]
 : 
   number {$value = $number.value;} | 
   (IF LPAREN (~RPAREN)+ RPAREN) => if_expression {$value = $if_expression.value;} | 
-  (MRATIO LPAREN (~RPAREN)+ RPAREN) |
+  (MRATIO LPAREN (~RPAREN)+ RPAREN) => mratio {$value = $mratio.value;} |
   (STRING LPAREN (expression2 (COMMA expression2)*)? RPAREN) => function {$value = $function.value;} | 
   variable {$value = $variable.value;} | 
   (EXP | LN | LOG10 | LOG2 | SQRT | RINT | ABS | SIN | COS | TAN | ASIN | ACOS | ATAN | SINH | COSH | TANH | ASINH | ACOSH | ATANH) LPAREN e1=expression2 RPAREN {$value = Math.exp($e1.value);} | 
@@ -161,6 +161,11 @@ variable returns [Double value]
       System.err.println(msg);
     }
   }
+;
+
+mratio returns [Double value]
+:
+  MRATIO LPAREN expression2 COMMA e1=expression2 COMMA expression2 RPAREN {$value = $e1.value;}
 ;
 
 if_expression returns [Double value]

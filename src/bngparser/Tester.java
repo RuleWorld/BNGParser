@@ -46,7 +46,11 @@ public class Tester {
 		String inputFile2;
 		
 		List<String> inputFileList = new ArrayList<String>();
-		inputFileList = getFileNames("testModels");
+    // ASS2019 - This needs to point to ../ IF we are going to call it 
+    // from within s_build script. Honestly a better way is to take 
+    // the input path from the cmd line or something but let's keep 
+    // s_build working for now
+		inputFileList = getFileNames("../testModels");
 //		inputFileList.add("testModels/test_mratio.bngl");
 		String outputFile = "output.xml";
 		
