@@ -196,7 +196,10 @@ MM: 'MM';
 HILL: 'Hill';
 ARRHENIUS: 'Arrhenius';
 
+// Custom BNG functions
 IF: 'if';
+MRATIO: 'mratio';
+
 EXP: 'exp';
 //LOG: 'log'; deprecated
 LN: 'ln';

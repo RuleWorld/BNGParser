@@ -19,7 +19,12 @@ echo ' Generate grammars'
 echo '-------------------------------------------------------------------'
 
 java -jar  ../../antlr-3.3-complete.jar BNGLexer.g
-java -jar  ../../antlr-3.3-complete.jar BNGGrammar.g
+# ASS2019 - This thing DOES NOT compile with Java 8 or above so you will need
+# JDK1.7 or under. I'm using openJDK here and will leave this here as a reminder 
+# I normally wouldn't hard code anything but this NEEDS to be fixed if you want to 
+# actually compile this. Alternative and better solution is to upgrade to 
+# ANTLR 3.5.2 but this source code doesn't compile with that either.
+~/apps/open_jdk7/bin/java -jar  ../../antlr-3.3-complete.jar BNGGrammar.g
 
 echo '-------------------------------------------------------------------'
 echo ' Compile grammars'
